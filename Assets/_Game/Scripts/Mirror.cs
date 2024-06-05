@@ -42,6 +42,10 @@ public class Mirror : MonoBehaviour
         if(Input.GetMouseButtonUp(0)){
             this.currentPoint = Vector3.one * 999;
             isDragging = false;
+            var pos = transform.position;
+            pos.x = Mathf.Round(pos.x);
+            pos.z = Mathf.Round(pos.z);
+            transform.position = pos;
         }
     }
 
@@ -62,4 +66,6 @@ public class Mirror : MonoBehaviour
             return ray.origin + ray.direction.normalized * rayLength;
         }
     }
+
+    public void SetSide(int side) => this.side = side;
 }

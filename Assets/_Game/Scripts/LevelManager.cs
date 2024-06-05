@@ -7,9 +7,12 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     [SerializeField] private List<LevelCube> cubeList;
+    private List<LevelCube> projImageList;
+    
 
     private void Awake(){
         Instance = this;
+        projImageList = new List<LevelCube>();
     }
 
     public void InterateCube(UnityAction<LevelCube, int> callback){
@@ -17,5 +20,8 @@ public class LevelManager : MonoBehaviour
         {
             callback?.Invoke(cubeList[i], i);
         }
+    }
+    public void AddProjectionImage(LevelCube projImage){
+        this.projImageList.Add(projImage);  
     }
 }

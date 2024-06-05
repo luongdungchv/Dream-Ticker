@@ -129,7 +129,6 @@ public class RotateCluster : CubeCluster
                     var dot2 = Vector3.Dot(dir, pos.XY());
                     if (dot1 < -0.01f || dot2 < -0.01f) return;
                     collide = DL.Utils.MathUtils.IsCircleOverlapSquare(Vector2.zero, radius, dir, 0.5f);
-                    Debug.Log((cube.name, item.name, dir, radius, cubeLocalPos, pos, collide));
                 });
                 if (collide)
                 {
@@ -141,10 +140,9 @@ public class RotateCluster : CubeCluster
             {
                 currentEuler.z += 90 * sign;
                 transform.rotation = Quaternion.Euler(currentEuler);
-                Debug.Log("rotate");
             }
         }
-
+        foreach (var cube in this.cubeList) cube.SynchronizeProjectionImage(SymmetricDisplayer.Instance.ProjectionSide);
     }
 
     private enum RotateAxis

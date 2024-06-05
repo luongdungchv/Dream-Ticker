@@ -5,12 +5,24 @@ Shader "Unlit/MirrorShader"
         _Color ("Color", Color) = (1,1,1,1)
         _Power ("Power", Float) = 1
         _EdgeOpacity ("EdgeOpacity", Float) = 1
+
+        _Stencil ("Stencil ID", Float) = 0
+        _StencilWriteMask ("Stencil Write Mask", Float) = 255
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" "Queue"="Transparent"}
         LOD 100
         Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
+
+        Stencil
+        {
+            Ref [_Stencil]
+            Comp Always
+            Pass Replace
+            //WriteMask [_StencilWriteMask]
+        }
 
         Pass
         {
